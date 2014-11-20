@@ -1,4 +1,13 @@
 @import "bootstrap";
+/* mixins, variables, etc. */
+
+$grayMediumLight: #eaeaea;
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
 html {
   overflow-y: scroll;
@@ -51,8 +60,6 @@ p {
   line-height: 1.7em;
 }
 
-
-
 /* header */
 
 #logo {
@@ -103,4 +110,3 @@ footer ul li {
   float: left;
   margin-left: 10px;
 }
-
