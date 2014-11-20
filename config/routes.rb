@@ -1,4 +1,6 @@
 TaskManager::Application.routes.draw do
+  resources :tasks
+
   devise_for :users, :controllers => { registrations: 'registrations' }
   get 'persons/profile', as: 'user_root'
   root  'users#new'
