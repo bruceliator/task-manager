@@ -9,6 +9,14 @@ $grayMediumLight: #eaeaea;
   box-sizing: border-box;
 }
 
+@mixin icons {
+	float: left;
+	display: block;
+	width: 24px;
+	height: 24px;
+	margin-left: 10px; 
+}
+
 html {
   overflow-y: scroll;
 }
@@ -66,17 +74,27 @@ p {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: #fff;
+  color: #000;
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
   line-height: 1;
+  -webkit-transition: 0.5s ease-out 0.5s;
+     //-moz-transition: 0.5s ease-out 0.5s;
+     -o-transition: 0.5s ease-out 0.5s;
+     transition: 0.5s ease-out;
 }
 
 #logo:hover {
-  color: #fff;
+  color: #04C;
+  letter-spacing: 2px;
   text-decoration: none;
+   //-moz-transform: rotate(5deg); /* Для Firefox */
+    -ms-transform: rotate(5deg); /* Для IE */
+    -webkit-transform: rotate(5deg); /* Для Safari, Chrome, iOS */
+    -o-transform: rotate(5deg); /* Для Opera */
+    transform: rotate(5deg);
 }
 
 
@@ -109,4 +127,90 @@ footer ul {
 footer ul li {
   float: left;
   margin-left: 10px;
+}
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+.complited label {
+  display: inline-block;
+  max-width: 100%;
+}
+.container #error_explanation {
+  color: #f00;
+  border: none;
+  border-radius: 5px;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+    li {
+      list-style: none;
+    }
+  }
+}
+
+.container .field_with_errors {
+  @extend .control-group;
+  @extend .error;
+  		
+}
+
+/*Tasks*/
+.bs-callout {
+    padding: 10px;
+    margin: 10px 0px;
+    border-width: 1px 1px 1px 5px;
+    border-style: solid;
+    border-color: #EEE;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    border-radius: 3px;
+}
+
+.bs-callout-info {
+    border-left-color: #5BC0DE;
+    h2 {
+	margin: 5px;	
+	text-align: justify;
+	color: #333;
+    }
+}
+
+.edit_link {
+	@include icons;
+	background: url(image-path('pencil-add-icon.png'));
+
+}
+
+.delete_link {
+	@include icons;
+	background: url(image-path('Industry-Trash-2-icon.png'));
+}
+
+.task_wrap {
+	position:relative;
+	overflow: hidden;
+}
+
+.icons_wrap {
+	position: absolute;
+	top: 12px;
+	left: -100px;
+}
+
+.task_title {
+	color: #333;
 }

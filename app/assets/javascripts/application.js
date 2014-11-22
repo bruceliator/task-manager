@@ -16,8 +16,6 @@
 //= require_tree .
 
 
-$(function() {
-  $( '.modelname_due_date' ).datepicker();
-});
+
 
 

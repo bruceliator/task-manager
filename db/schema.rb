@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20141120151030) do
     t.integer  "priority"
     t.date     "due_date"
     t.integer  "user_id"
+    t.boolean  "complited"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,21 +1,17 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header class="navbar navbar-fixed-top navbar">
       <div class="navbar-inner">
         <div class="container">
-          <%= link_to "sample app", signin_path, id: "logo" %>
+          <%= link_to "sample app", tasks_path, id: "logo" %>
           <nav>
 		
             <ul class="nav pull-right">
               <% if user_signed_in? %>
 			<span class="label label-info"><%= current_user.first_name %></span>
-              <% end %>
-	      <% if user_signed_in? %>
-               <li class="active"><%= link_to "Edit profile",    edit_user_registration_path %></li>
-	      <% end %>
-               <li><%= link_to "Help",    '#' %></li>
-	      <% if user_signed_in? %>
-	       <li><%= link_to "Sign out", destroy_user_session_path, method: "delete"%></li>
+			<li class="active"><%= link_to "Edit profile",    edit_user_registration_path %></li>
+	       		<li><%= link_to "Sign out", destroy_user_session_path, method: "delete"%></li>
 	      <% else %>
-	       <li><%= link_to "Sign in", signin_path %></li>		
+	       <li><%= link_to "Sign in", tasks_path %></li>
+	       <li><%= link_to "Sign up", new_user_registration_path %></li>				
 	      <% end %>
             </ul>
           </nav>

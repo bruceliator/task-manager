@@ -1,35 +1,47 @@
-<h1>Listing tasks</h1>
+<div class="row">
+  <div class="span6 offset3">
+	<% if @incomplited_tasks.any? %>
+	  <h2>Incomplited tasks</h2>
+	<% end %>
+	
+	<% @incomplited_tasks.each do |task| %>	
+	<div class="bs-callout bs-callout-info task_wrap">
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Priority</th>
-      <th>Due date</th>
-      <th>User</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+	    <h2><%= link_to task.title, task, class: "task_title"%></h2>
+	    <div class="icons_wrap">
+		<%= link_to '', edit_task_path(task), class: "edit_link" %>
+            	<%= link_to '', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 			"delete_link" %>
+	    </div>
+  	</div>
+	<% end %>
+	<% if @complited_tasks.any? %>
+	  <h2>Complited tasks</h2>
+	<% end %>
+	<% @complited_tasks.each do |task| %>	
+	<div class="bs-callout bs-callout-info task_wrap">
 
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.title %></td>
-        <td><%= task.description %></td>
-        <td><%= task.priority %></td>
-        <td><%= task.due_date %></td>
-        <td><%= task.user_id %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	    <h2><%= link_to task.title, task, class: "task_title"%></h2>
+            <div class="icons_wrap">
+		<%= link_to '', edit_task_path(task), class: "edit_link" %>
+            	<%= link_to '', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 			"delete_link" %>
+	    </div>
 
-<br>
+  	</div>
+	<% end %>
 
-<%= link_to 'New Task', new_task_path %>
+<br/>
+
+<%= link_to 'New Task', new_task_path, class: "btn btn-success" %>
+  </div>
+</div>
+<script>
+    $('.task_wrap').hover(function() {
+     $(this).find('.icons_wrap').stop().animate({
+        'left':'350px'},
+                            'slow');
+},function() {
+    $(this).find('.icons_wrap').stop().animate({
+        'left':'-100px'},
+                            'slow');
+    });	
+</script>

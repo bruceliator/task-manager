@@ -1,10 +1,18 @@
 TaskManager::Application.routes.draw do
   resources :tasks
 
-  devise_for :users, :controllers => { registrations: 'registrations' }
-  get 'persons/profile', as: 'user_root'
-  root  'users#new'
-  match '/signin',  to: 'users#new',  via: 'get'
+  devise_for :users
+
+devise_scope :user do
+  authenticated :user do
+    root 'tasks#index', as: :authenticated_root
+  end
+
+  unauthenticated do
+    root 'devise/sessions#new', as: :unauthenticated_root
+  end
+end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
