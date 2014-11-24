@@ -1,47 +1,15 @@
 <div class="row">
   <div class="span6 offset3">
-	<% if @incomplited_tasks.any? %>
-	  <h2>Incomplited tasks</h2>
-	<% end %>
-	
-	<% @incomplited_tasks.each do |task| %>	
-	<div class="bs-callout bs-callout-info task_wrap">
+   <div id="incomplited_tasks">
+	<%= render 'incomplited_tasks'%>
+   </div>
 
-	    <h2><%= link_to task.title, task, class: "task_title"%></h2>
-	    <div class="icons_wrap">
-		<%= link_to '', edit_task_path(task), class: "edit_link" %>
-            	<%= link_to '', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 			"delete_link" %>
-	    </div>
-  	</div>
-	<% end %>
-	<% if @complited_tasks.any? %>
-	  <h2>Complited tasks</h2>
-	<% end %>
-	<% @complited_tasks.each do |task| %>	
-	<div class="bs-callout bs-callout-info task_wrap">
-
-	    <h2><%= link_to task.title, task, class: "task_title"%></h2>
-            <div class="icons_wrap">
-		<%= link_to '', edit_task_path(task), class: "edit_link" %>
-            	<%= link_to '', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 			"delete_link" %>
-	    </div>
-
-  	</div>
-	<% end %>
+   <div id="complited_tasks">
+	<%= render 'complited_tasks'%>
+   </div>
 
 <br/>
 
-<%= link_to 'New Task', new_task_path, class: "btn btn-success" %>
+<%= link_to 'New Task', new_task_path, class: "btn btn-success", id:"new_task" %>
   </div>
 </div>
-<script>
-    $('.task_wrap').hover(function() {
-     $(this).find('.icons_wrap').stop().animate({
-        'left':'350px'},
-                            'slow');
-},function() {
-    $(this).find('.icons_wrap').stop().animate({
-        'left':'-100px'},
-                            'slow');
-    });	
-</script>

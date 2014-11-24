@@ -1,0 +1,13 @@
+<% if @complited_tasks.any? %>
+    <%= form_tag destroy_multiple_tasks_path, method: :delete do %>
+      <div>
+	  <h2>Complited tasks</h2>
+	  <button class="btn btn-mini btn-primary check_all" type="button">Check all</button>
+          <button class="btn btn-mini uncheck_all" type="button">uncheck all</button>
+	<% @complited_tasks.each do |task| %>	
+		<%= render 'tasks', :task => task%>
+	<% end %>
+     </div>
+	<%= submit_tag "Delete selected", class: "btn btn-mini"%>
+    <% end %>
+<% end %>

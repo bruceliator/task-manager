@@ -1,12 +1,13 @@
 class TasksController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @complited_tasks = current_user.tasks.where(:complited => true)
-    @incomplited_tasks = current_user.tasks.where(:complited => false)
+    @complited_tasks = current_user.tasks.where(:complited => true).order(sort_column + " " + sort_direction)
+    @incomplited_tasks = current_user.tasks.where(:complited => false).order(sort_column + " " + sort_direction)
   end
 
   # GET /tasks/1
@@ -54,6 +55,11 @@ class TasksController < ApplicationController
       end
     end
   end
+	
+  def complete_multiple 
+    current_user.tasks.where(id: params[:task_ids]).update_all(["complited=?", true])
+    redirect_to tasks_path
+  end
 
   # DELETE /tasks/1
   # DELETE /tasks/1.json
@@ -62,8 +68,22 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tasks_url }
       format.json { head :no_content }
+      format.js
     end
   end
+
+  def destroy_multiple
+    Task.destroy(params[:task_ids])
+    respond_to do |format|
+      format.html { redirect_to tasks_url }
+      format.json { head :no_content }
+    end
+    rescue ActiveRecord::RecordNotFound
+      redirect_to tasks_path
+
+end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -75,4 +95,12 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:title, :description, :priority, :due_date, :user_id, :complited)
     end
+
+  def sort_column
+    Task.column_names.include?(params[:sort]) ? params[:sort] : "title"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 end

@@ -1,0 +1,14 @@
+<div id="link_id"><%= sortable "title"%></div>
+<% if @incomplited_tasks.any? %>
+    <%= form_tag complete_multiple_tasks_path, method: :put do %>
+      <div>
+	  <h2>Incomplited tasks</h2>
+	  <button class="btn btn-mini btn-primary check_all" type="button">Check all</button>
+          <button class="btn btn-mini uncheck_all" type="button">uncheck all</button>	
+	<% @incomplited_tasks.each do |task| %>	
+		<%= render 'tasks', :task => task%>
+	<% end %>
+     </div>
+	<%= submit_tag "Complete selected", class: "btn btn-mini" %>
+    <% end %>
+<% end %>

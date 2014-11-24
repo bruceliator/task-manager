@@ -1,0 +1,8 @@
+	 <div class="bs-callout bs-callout-info task_wrap" id = "task_wrap_<%= task.id %>">
+	    <input class="box" type="checkbox" name="task_ids[]" value="<%= task.id %>"/>
+	    <h2><%= link_to task.title, task, class: "task_title"%></h2>
+            <div class="icons_wrap">
+		<%= link_to '', edit_task_path(task), class: "edit_link" %>
+            	<%= link_to '', task, method: :delete, class: 	"delete_link", remote: true %>
+	    </div>
+  	</div>

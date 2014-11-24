@@ -137,7 +137,10 @@ input, textarea, select, .uneditable-input {
   margin-bottom: 15px;
   @include box_sizing;
 }
-
+input[type="checkbox"] {
+	float: left;
+	margin-right: 10px;
+}
 input {
   height: auto !important;
 }
@@ -213,4 +216,22 @@ input {
 
 .task_title {
 	color: #333;
+}
+
+.current {
+  padding-right: 20px;
+  background-repeat: no-repeat;
+  background-position: right center;
+  float: right;
+}
+.current:hover {
+	text-decoration: none;
+}
+
+.asc {
+  background-image: url(image-path('arrow-blue-up.png'));
+}
+
+.desc {
+  background-image: url(image-path('arrow-blue-down.png'));
 }

@@ -1,17 +1,22 @@
 TaskManager::Application.routes.draw do
-  resources :tasks
-
   devise_for :users
 
-devise_scope :user do
-  authenticated :user do
-    root 'tasks#index', as: :authenticated_root
+  devise_scope :user do
+    authenticated :user do
+      root 'tasks#index', as: :authenticated_root
+    end
+
+    unauthenticated do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
   end
 
-  unauthenticated do
-    root 'devise/sessions#new', as: :unauthenticated_root
+  resources :tasks do
+    collection do
+      put 'complete_multiple'
+      delete 'destroy_multiple'
+    end
   end
-end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
