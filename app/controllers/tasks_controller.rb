@@ -13,6 +13,14 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+  	@task = current_user.tasks.find(params[:id])
+	respond_to do |format|
+		format.html # show.html.erb
+		format.json { render :json => @task }
+	end
+	rescue ActiveRecord::RecordNotFound
+      redirect_to tasks_path
+
   end
 
   # GET /tasks/new
