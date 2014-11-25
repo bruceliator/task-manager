@@ -1,1 +1,14 @@
-$('#task_wrap_<%= @task.id %>').fadeOut("slow");
+var element = $('#task_wrap_<%= @task.id %>').parent();
+$('#task_wrap_<%= @task.id %>').fadeOut("slow", function() {
+	$(this).remove();
+	removeEmpty();
+})
+
+function removeEmpty() {
+	if (element.find('.task_wrap').length == 0) {
+		element.closest('form').fadeOut("slow", function() {
+			$(this).remove();
+		})
+	}
+}
+

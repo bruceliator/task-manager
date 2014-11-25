@@ -19,7 +19,7 @@ ready = function() {
         'left':'-100px'},
                             'slow');
  });
-	
+
 
 	$("#link_id a").live(function() {
 		$.getScript(this.href);
